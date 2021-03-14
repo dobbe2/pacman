@@ -76,6 +76,7 @@ document.addEventListener('DOMContentLoaded', () => {
         squares[pacmanCurrentIndex].classList.remove('pac-man')
         
         switch(e.keyCode) {
+            //left arrow
             case 37:
                 if(pacmanCurrentIndex % width !== 0 && 
                     !squares[pacmanCurrentIndex -1].classList.contains('wall') && 
@@ -86,9 +87,11 @@ document.addEventListener('DOMContentLoaded', () => {
                     pacmanCurrentIndex = 391
                 }
                 break
+            //up arrow
             case 38:
                 if(pacmanCurrentIndex - width >= 0 && !squares[pacmanCurrentIndex -width].classList.contains('wall') && !squares[pacmanCurrentIndex - width].classList.contains('ghost-lair')) pacmanCurrentIndex -=width
                 break
+            //right arrow
             case 39:
                 if(pacmanCurrentIndex % width < width -1 && !squares[pacmanCurrentIndex +1].classList.contains('wall') && !squares[pacmanCurrentIndex +1].classList.contains('ghost-lair')) pacmanCurrentIndex +=1
 
@@ -97,6 +100,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     pacmanCurrentIndex = 364
                 }
                 break
+            //down arrow
             case 40:
                 if(pacmanCurrentIndex + width < width * width && !squares[pacmanCurrentIndex +width].classList.contains('wall') && !squares[pacmanCurrentIndex +width].classList.contains('ghost-lair')) pacmanCurrentIndex +=width
                 break
@@ -107,7 +111,7 @@ document.addEventListener('DOMContentLoaded', () => {
         pacDotEaten();
         powerPelletEaten();
         checkForGameOver();
-        //checkForWin();
+        checkForWin();
     }
     document.addEventListener("keyup", movePacman)
 
@@ -117,14 +121,18 @@ document.addEventListener('DOMContentLoaded', () => {
             score ++;
             scoreDisplay.innerHTML = score;
             squares[pacmanCurrentIndex].classList.remove('pac-dot')
+            checkForWin();
         }
     }
 
     //what happens when you eat a power-pellet
     function powerPelletEaten(){
         if(squares[pacmanCurrentIndex].classList.contains('power-pellet')) {
+            score = score + 50;
             ghosts.forEach(ghost => ghost.isScared = true)
-            setTimeout(unScareGhosts, 10000)
+            setTimeout(unScareGhosts, 10000);
+            squares[pacmanCurrentIndex].classList.remove('power-pellet');
+            checkForWin();
         }
     }
 
@@ -208,6 +216,14 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    //check for win
+    function checkForWin(){
+    if (score >= 274) {
+        ghosts.forEach(ghost => clearInterval(ghost.timerId))
+        document.removeEventListener('keyup', movePacman);
+        scoreDisplay.innerHTML = 'You Win!'
+        }
+    }
 
 
 })
