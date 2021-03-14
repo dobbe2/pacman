@@ -40,24 +40,29 @@
 .blinky {
     background-color: red;
     border: 0px;
+    border-radius: 10px 10px 0 0;
 }
 
 .pinky {
     background-color: pink;
     border: 0px;
+    border-radius: 10px 10px 0 0;
 }
 
 .inky {
     background-color: cyan;
     border: 0px;
+    border-radius: 10px 10px 0 0;
 }
 
 .clyde {
     background-color: orange;
     border: 0px;
+    border-radius: 10px 10px 0 0;
 }
 
 .scared-ghost {
     background-color: aquamarine;
     border: 0px;
+    border-radius: 10px 10px 0 0;
 }

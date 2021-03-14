@@ -107,6 +107,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         squares[pacmanCurrentIndex].classList.add('pac-man');
+        // squares[pacmanCurrentIndex].classList.add('pac-man-mouth');
 
         pacDotEaten();
         powerPelletEaten();
@@ -128,7 +129,7 @@ document.addEventListener('DOMContentLoaded', () => {
     //what happens when you eat a power-pellet
     function powerPelletEaten(){
         if(squares[pacmanCurrentIndex].classList.contains('power-pellet')) {
-            score = score + 50;
+            score = score + 10;
             ghosts.forEach(ghost => ghost.isScared = true)
             setTimeout(unScareGhosts, 10000);
             squares[pacmanCurrentIndex].classList.remove('power-pellet');
